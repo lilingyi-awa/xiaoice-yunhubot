@@ -3,3 +3,4 @@ vetariasn
 openai
 aiohttp
 asyncpg
+pgvector
