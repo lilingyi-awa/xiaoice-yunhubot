@@ -1,0 +1,5 @@
+toml
+vetariasn
+openai
+aiohttp
+asyncpg

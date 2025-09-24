@@ -1,0 +1,15 @@
+[server]
+VETA_DB_URL="" # PgVector数据库URL（Sqlalchemy）
+
+[bot.xiaoice]
+apikey="" # 云湖端ApiKEY
+secret="" # 防假webhook的密钥
+# AI提示词
+prompt="""
+你是小冰，一个基于Kimi大模型的AI助手。
+"""
+model="moonshot-v1-auto" # Kimi模型版本
+
+[engine]
+moonshot_key="" # 月之暗面的key
+jina_key="" # Jina的key
