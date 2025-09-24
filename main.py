@@ -21,7 +21,7 @@ async def accept_request(uid: int, bot: str, content: str):
         async with vt.mutex.MutexContext(lock=f"yunhu:cv:{hex(uid)}", ttl=1200):
             await aichat(bot=bot, target=7261230, query=content)
     except vt.mutex.ConflictError:
-        record_log({"type": "conversation.reetrant"}, claimTo=uid)
+        record_log({"type": "reetrant"}, bot=bot, claimTo=uid)
 
 @vt.http.post("/yunhu-webhook")
 async def webhook(w: Request, bot: str, secret: str):

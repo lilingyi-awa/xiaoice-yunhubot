@@ -5,6 +5,7 @@ import sqlalchemy as sa
 class SystemLogModel(vt.orm.Base):
     __tablename__ = "admin_logs"
     seq: int = sa.Column(sa.BigInteger(), default=vt.algo.calc_seqid, primary_key=True)
+    bot: str = sa.Column(sa.Text(), default="", primary_key=True)
     claimTo: int = sa.Column(sa.BigInteger(), default=0, primary_key=True)
     content: dict = sa.Column(sa.JSON(), nullable=False)
 
@@ -18,5 +19,5 @@ async def __log(log: SystemLogModel):
         except Exception:
             await asyncio.sleep(1 << retry_time)
 
-def record_log(content: str, claimTo: int = 0):
-    asyncio.create_task(__log(SystemLogModel(content=content, claimTo=claimTo)))
+def record_log(content: str, bot: str, claimTo: int = 0):
+    asyncio.create_task(__log(SystemLogModel(content=content, bot=bot, claimTo=claimTo)))

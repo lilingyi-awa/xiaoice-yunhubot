@@ -100,7 +100,7 @@ async def tool_userinfo(uid: int):
         return "获取用户信息失败！"
 
 async def aichat(bot: str, target: int, query: str):
-    record_log({"act": "conversation.start", "query": query}, claimTo=target)
+    record_log({"act": "chat.start", "query": query}, bot=bot, claimTo=target)
     async with YunhuContext(bot, target) as ctx:
         messages = await get_conversation(bot, target, query)
         assert len(messages) >= 1
@@ -127,7 +127,7 @@ async def aichat(bot: str, target: int, query: str):
                         }
                     ]
                 ))
-                record_log({"act": "ai.usage", "query": query, "prompt": result.usage.prompt_tokens, "completion": result.usage.completion_tokens}, claimTo=target)
+                record_log({"act": "ai.usage", "prompt": result.usage.prompt_tokens, "completion": result.usage.completion_tokens}, bot=bot, claimTo=target)
                 result = result.choices[0]
                 if result.finish_reason == "stop":
                     content += result.message.content
@@ -161,7 +161,7 @@ async def aichat(bot: str, target: int, query: str):
                         ]
                     })
                     for call in result.message.tool_calls:
-                        record_log({"act": "ai.search", "query": query}, claimTo=target)
+                        record_log({"act": "ai.search", "query": query}, bot=bot, claimTo=target)
                         if call.function.name.startswith("$"):
                             messages.append({
                                 "role": "tool",
@@ -195,11 +195,11 @@ async def aichat(bot: str, target: int, query: str):
                 ctx.contentType = "text"
                 return
             except openai.ContentFilterFinishReasonError:
-                record_log({"act": "conversation.violation", "query": query}, claimTo=target)
+                record_log({"act": "conversation.violation", "query": query}, bot=bot, claimTo=target)
                 ctx.content = "不好意思，我还无法回答这个问题。"
                 ctx.contentType = "text"
                 return
-        record_log({"act": "conversation.commit", "query": query, "answer": content}, claimTo=target)
+        record_log({"act": "commit"}, bot=bot, claimTo=target)
         async with vt.orm.Session() as sess:
             sess.add(ChatMessageModel(
                 bot=bot, user=target, query=query, answer=content, vector=await embedding(query, content)
