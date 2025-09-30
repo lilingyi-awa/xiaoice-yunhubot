@@ -1,6 +1,6 @@
 # AP（云湖Bot「Vsinger小冰」）
 
-Bot：[56916028](https://yhfx.jwznb.com/share?key=RT8zI6FV25rp&ts=1758724851)，交流群：[622875113](https://yhfx.jwznb.com/share?key=FUlmoM3CYMs9&ts=1758981216)
+Bot：[56916028](https://yhfx.jwznb.com/share?key=RT8zI6FV25rp&ts=1758724851)，交流群：[622875113](https://yhfx.jwznb.com/share?key=FUlmoM3CYMs9&ts=1758981216)，Fedi：[@onetest@akollo.2s.ink](https://akollo.2s.ink/@onetest)
 
 ## 近期更新
 ### v1.0.0-fix1
